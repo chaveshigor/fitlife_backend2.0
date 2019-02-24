@@ -4,8 +4,8 @@ This is the API service to be consumed by FitLife frontend aplication(react / re
 
 ## Routes
 
-New Personal(GET): mydomain/personal
-Search Personals(GET) : mydomain/personal
+1. New Personal(GET): mydomain/personal
+2. Search Personals(GET) : mydomain/personal
 
 ## Setup
 
