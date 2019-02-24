@@ -1,12 +1,11 @@
-# Adonis API application
+# FitLife API application
 
-This is the boilerplate for creating an API server in AdonisJs, it comes pre-configured with.
+This is the API service to be consumed by FitLife frontend aplication(react / react-native)
 
-1. Bodyparser
-2. Authentication
-3. CORS
-4. Lucid ORM
-5. Migrations and seeds
+## Routes
+
+New Personal(GET): mydomain/personal
+Search Personals(GET) : mydomain/personal
 
 ## Setup
 
