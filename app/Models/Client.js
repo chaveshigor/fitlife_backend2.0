@@ -24,6 +24,20 @@ class Client extends Model {
         return this.hasMany('App/Models/Token')
       }
 
+      hired_services () {
+        return this.belongsToMany(
+          'App/Models/Service', 
+          'client_id', 
+          'service_id').pivotTable('client_services')
+      }
+
+      my_personals () {
+        return this.belongsToMany('App/Models/Personal',
+        'client_id',
+        'personal_id')
+        .pivotTable('client_personals')
+      }
+
       static scopeNearBy (query, latitude, longitude, distance) {
         const haversine = `(6371 * acos(cos(radians(${latitude}))
         * cos(radians(latitude))

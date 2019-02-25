@@ -9,7 +9,13 @@ class Service extends Model {
         return this.belongsTo('App/Models/Personal')
     }
 
-    
+    clients () {
+        return this.belongsToMany(
+        'App/Models/Client',
+        'service_id',
+        'client_id'
+        ).pivotTable('client_services')
+    }
 
 }
 

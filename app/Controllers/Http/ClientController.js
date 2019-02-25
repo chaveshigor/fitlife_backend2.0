@@ -4,9 +4,15 @@ const Client = use('App/Models/Client')
 
 class ClientController {
 
+  async me ({ auth }) {
+    const me = await auth.authenticator('client').getUser()
+    const client = await Client.query().where('id', me.id).with('hired_services').with('my_personals').fetch()
+    return client
+  }
+
   async index ({ request, response, view }) {
     const { latitude, longitude, distance } = request.all()
-    const client = await Client.query().nearBy(latitude, longitude, distance).with('contractedServices').fetch()
+    const client = await Client.query().nearBy(latitude, longitude, distance).fetch()
     return client
   }
 

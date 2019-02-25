@@ -28,8 +28,12 @@ class Personal extends Model {
       }
 
       my_clients () {
-        return this.hasMany('App/Models/Client')
-      }
+        return this.belongsToMany(
+        'App/Models/Client',  
+        'personal_id',
+        'client_id'
+        ).pivotTable('client_personals')
+    }
 
       static scopeNearBy (query, latitude, longitude, distance) {
         const haversine = `(6371 * acos(cos(radians(${latitude}))

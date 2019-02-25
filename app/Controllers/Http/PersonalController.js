@@ -4,6 +4,12 @@ const Personal = use('App/Models/Personal')
 
 class PersonalController {
 
+  async me ({ auth }) {
+    const me = await auth.authenticator('personal').getUser()
+    const personal = await Personal.query().where('id', me.id).with('my_services').with('my_clients').fetch()
+    return personal
+  }
+
   async index ({ request }) {
     const { latitude, longitude, distance } = request.all()
     const personal = await Personal.query().nearBy(latitude, longitude, distance).with('my_services').fetch()
