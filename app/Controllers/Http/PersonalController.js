@@ -6,7 +6,7 @@ class PersonalController {
 
   async index ({ request }) {
     const { latitude, longitude, distance } = request.all()
-    const personal = await Personal.query().nearBy(latitude, longitude, distance).with('myServices').fetch()
+    const personal = await Personal.query().nearBy(latitude, longitude, distance).with('my_services').fetch()
     return personal
 
   }

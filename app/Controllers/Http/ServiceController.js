@@ -1,28 +1,34 @@
 'use strict'
 
 const Service = use('App/Models/Service')
-const Personal = use('App/Models/Personal')
 
 class ServiceController {
 
   async index ({ request, response, view }) {
-    const service = await Service.all()
+    const service = await Service.query().with('from_personal').fetch()
     return service
   }
 
-  async store ({ request, auth, response, view }) {
+  async newService ({ request, auth }) {
     const data = request.all()
-    const user = await auth.authenticator('personal').getUser()//Pega informações do usuário
-    const service = await Service.create({ personal_id: user.id, ...data })
+    const personal = await auth.authenticator('personal').getUser()//Pega informações do usuário
+    const service = await Service.create({ personal_id: personal.id, ...data })
     return service
   }
 
-  async show ({ params, request, response, view }) {
-    const service = await Service.find(params.id)
+  async hireService ({ auth, params }) {
+    const service = await Service.findOrFail(params.id)
+    const client = await auth.authenticator('client').getUser()
+    //const hiredService = await HiredService.create({service})
+    //return hiredService
+  }
+
+  async show ({ params }) {
+    const service = await Service.findOrFail(params.id)
     return service
   }
 
-  async update ({ params, request, response }) {
+  async update ({ params, request }) {
     const data = request.only(['title','price','description'])
     const service = await Service.find(params.id)
     service.merge(data)

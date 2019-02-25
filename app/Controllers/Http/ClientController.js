@@ -6,7 +6,7 @@ class ClientController {
 
   async index ({ request, response, view }) {
     const { latitude, longitude, distance } = request.all()
-    const client = await Client.query().nearBy(latitude, longitude, distance).fetch()
+    const client = await Client.query().nearBy(latitude, longitude, distance).with('contractedServices').fetch()
     return client
   }
 
@@ -29,15 +29,6 @@ class ClientController {
     return client
   }
 
-
-  /**
-   * Delete a client with id.
-   * DELETE clients/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
   async destroy ({ params, request, response }) {
     const client = await Client.find(params.id)
     await client.delete()

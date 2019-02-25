@@ -3,6 +3,7 @@
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model')
 const Hash = use('Hash')
+const Database = use('Database')
 
 class Client extends Model {
     static boot () {
@@ -14,17 +15,13 @@ class Client extends Model {
           }
         })
       }
+
+      static get hidden () {
+        return ['password']
+      }
       
       tokens () {
         return this.hasMany('App/Models/Token')
-      }
-
-      services () {
-        return this.hasMany('App/Models/Service')
-      }
-
-      myPersonals () {
-        return this.belongsToMany('App/Models/Personal')
       }
 
       static scopeNearBy (query, latitude, longitude, distance) {

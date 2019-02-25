@@ -10,6 +10,7 @@ class ServiceSchema extends Schema {
       table
         .integer('personal_id')
         .unsigned()
+        .notNullable()
         .references('id')
         .inTable('personals')
         .onUpdate('CASCADE')

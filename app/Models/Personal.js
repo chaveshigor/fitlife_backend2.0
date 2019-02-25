@@ -14,17 +14,21 @@ class Personal extends Model {
           }
         })
       }
+
+      static get hidden () {
+        return ['password']
+      }
       
       tokens () {
         return this.hasMany('App/Models/Token')
       }
 
-      myClients () {
-        return this.belongsToMany('App/Models/Client')
+      my_services () {
+        return this.hasMany('App/Models/Service')
       }
 
-      myServices () {
-        return this.hasMany('App/Models/Service')
+      my_clients () {
+        return this.hasMany('App/Models/Client')
       }
 
       static scopeNearBy (query, latitude, longitude, distance) {

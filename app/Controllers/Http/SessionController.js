@@ -16,7 +16,7 @@ class SessionController {
 
     }
 
-    async clientPersonal ({ request, auth }) {
+    async loginClient ({ request, auth }) {
 
         const { email, password } = request.all()
         const location = request.only(['latitude', 'longitude'])

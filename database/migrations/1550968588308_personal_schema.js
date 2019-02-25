@@ -7,14 +7,6 @@ class PersonalSchema extends Schema {
   up () {
     this.create('personals', (table) => {
       table.increments()
-      /*table
-        .integer('service_id')
-        .unsigned()
-        .notNullable()
-        .references('id')
-        .inTable('services')
-        .onUpdate('CASCADE')
-        .onDelete('CASCADE')//fazer migration*/
       table.string('name', 80).notNullable()
       table.string('email', 254).notNullable().unique()
       table.string('password', 60).notNullable()

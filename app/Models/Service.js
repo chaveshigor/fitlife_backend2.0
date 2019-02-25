@@ -5,13 +5,12 @@ const Model = use('Model')
 
 class Service extends Model {
 
-    serviceFromPersonal () {
+    from_personal () {
         return this.belongsTo('App/Models/Personal')
     }
 
-    serviceToClient () {
-        return this.belongsToMany('App/Models/Client')
-    }
+    
+
 }
 
 module.exports = Service
