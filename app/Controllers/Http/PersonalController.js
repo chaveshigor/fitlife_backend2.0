@@ -14,7 +14,6 @@ class PersonalController {
     const { latitude, longitude, distance } = request.all()
     const personal = await Personal.query().nearBy(latitude, longitude, distance).with('my_services').fetch()
     return personal
-
   }
 
   async store ({ request }) {

@@ -35,6 +35,19 @@ class ServiceController {
     return service
   }
 
+  async leaveService ({ auth, params }) {
+    const service = await Service.findOrFail(params.id)
+    const personal_id = service.personal_id
+    const personal = await Personal.find(personal_id)
+    const client = await auth.authenticator('client').getUser()
+    await client.hired_services().detach(service.id)
+    await client.my_personals().detach(personal_id)
+    await service.save()
+    await personal.save()
+    await client.save()
+    return service
+  }
+
   async deleteService ({ auth, params }) {
     const service = await Service.findOrFail(params.id)
     const client = await auth.authenticator('client').getUser()

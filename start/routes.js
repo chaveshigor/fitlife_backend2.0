@@ -15,4 +15,10 @@ Route.post('session/client', 'SessionController.loginClient')
 Route.get('hireservice/:id', 'ServiceController.hireService')
 Route.get('clientdash', 'ClientController.me')
 
+//BOUTH ACTIONS
+Route.post('session/clientpicture', 'ProfilePictureController.saveClientPicture')
+Route.post('session/personalpicture', 'ProfilePictureController.savePersonalPicture')
+Route.get('session/clientpicture/:id', 'ProfilePictureController.getClientPicture')
+Route.get('session/personalpicture/:id', 'ProfilePictureController.getPersonalPicture')
+
 
